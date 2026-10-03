@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Build;
+import android.os.SystemClock;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextDirectionHeuristics;
@@ -246,12 +247,12 @@ public class MainActivity extends Activity {
             // حلقه‌ها همیشه حول مرکز واقعی لوگو قرار می‌گیرند.
             p.setStyle(Paint.Style.STROKE);
             p.setStrokeWidth(8f);
-            p.setColor((int)(Math.min(255f,230f*fade)<<24) | 0xffd5a65a);
+            p.setColor((int)(Math.min(255f,230f*fade))<<24 | 0xffd5a65a);
             float ringT=Math.min(1f, Math.max(0f,(elapsed-180f)/900f));
             float r1=125f+70f*ringT, r2=155f+70f*ringT;
             c.drawCircle(cx,cy,r1,p);
             p.setStrokeWidth(4f);
-            p.setColor((int)(Math.min(210f,180f*fade)<<24) | 0xffead9bc);
+            p.setColor((int)(Math.min(210f,180f*fade))<<24 | 0xffead9bc);
             c.drawCircle(cx,cy,r2,p);
             p.setStyle(Paint.Style.FILL);
 
@@ -492,7 +493,7 @@ public class MainActivity extends Activity {
         }
         void drawPhoneStatus(Canvas c,String title,boolean lock){
             text(c,title,780,255,22,Color.WHITE,true,Layout.Alignment.ALIGN_OPPOSITE,250);
-            text(c,lock?"۱۴:۳۲":"۴G   ۸۷٪",270,255,22,0xffd8e1e7,true,Layout.Alignment.ALIGN_LEFT,250);
+            text(c,lock?"۱۴:۳۲":"۴G   ۸۷٪",270,255,22,0xffd8e1e7,true,Layout.Alignment.ALIGN_OPPOSITE,250);
             p.setColor(0x332f8ab8); c.drawRect(170,290,910,294,p);
         }
         void drawPhoneHome(Canvas c){
@@ -952,7 +953,7 @@ public class MainActivity extends Activity {
             if(i<0 || i>=22 || receiptLocked[i] || receiptPieces[i]==null)return;
             float dx=Math.abs(receiptPieceX[i]-receiptTargetX[i]);
             float dy=Math.abs(receiptPieceY[i]-receiptTargetY[i]);
-            int rot=((receiptRot[i]%360)+360)%360;
+            int rot=(int)(((receiptRot[i]%360)+360)%360);
             if(dx<=48f && dy<=48f && rot==0){
                 receiptPieceX[i]=receiptTargetX[i];
                 receiptPieceY[i]=receiptTargetY[i];
